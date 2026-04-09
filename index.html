@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Push Consent - All Versions (A, B, C)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #1A1A1A;
+            --text-main: #FFFFFF;
+            --text-sub: #A0A0A0;
+            --border: #333333;
+            --primary: #FF5E4D;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 800px;
+        }
+
+        .header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin: 0 0 16px 0;
+            background: linear-gradient(135deg, #FF8E82, #FF5E4D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: var(--text-sub);
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .gallery {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .frame-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .frame-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0;
+            padding: 8px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .frame-desc {
+            font-size: 14px;
+            color: var(--text-sub);
+            text-align: center;
+            max-width: 380px;
+            margin: 0;
+            min-height: 40px;
+        }
+
+        iframe {
+            width: 400px;
+            height: 850px;
+            border: none;
+            border-radius: 40px;
+            background: transparent;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            /* Zoom scale if needed to fit perfectly */
+        }
+
+        @media (max-width: 1200px) {
+            .gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+            body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Push Consent UI - Versions Overview</h1>
+        <p>요청하신 앱 푸시 동의 수집 화면의 3가지 버전을 한눈에 비교할 수 있는 대시보드입니다.<br>각 버전별 특징적인 인터랙션을 직접 클릭하여 테스트해보세요!</p>
+    </div>
+
+    <div class="gallery">
+        <!-- Version A -->
+        <div class="frame-container">
+            <h2 class="frame-title">버전 A (Version A)</h2>
+            <p class="frame-desc">기본 요구사항 구현<br>모든 토글이 명시적으로 노출되며 개별 조작 중심</p>
+            <iframe src="index_version_a.html" title="Version A"></iframe>
+        </div>
+
+        <!-- Version B -->
+        <div class="frame-container">
+            <h2 class="frame-title" style="color: #FF8E82;">버전 B (Version B)</h2>
+            <p class="frame-desc">마케팅 동의 끄기 방지 & 자동 켜짐 연동<br>알림 설정에 마케팅 토글 노출, 하단 팝업 유도 로직 적용</p>
+            <iframe src="index_version_b.html" title="Version B"></iframe>
+        </div>
+
+        <!-- Version C -->
+        <div class="frame-container">
+            <h2 class="frame-title" style="color: #FF5E4D;">버전 C (Version C)</h2>
+            <p class="frame-desc">Dynamic 팝업으로 사용자 경험 개선<br>광고 알림 ON 시 자연스러운 팝업으로 마케팅 유도 유도</p>
+            <iframe src="index_version_c.html" title="Version C"></iframe>
+        </div>
+    </div>
+
+</body>
+</html>

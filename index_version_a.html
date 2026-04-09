@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Push Consent Redesign Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF5E4D;
+            --primary-light: #FF8E82;
+            --bg: #F8F9FA;
+            --card-bg: #FFFFFF;
+            --text-main: #1A1A1A;
+            --text-sub: #666666;
+            --border: #EEEEEE;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-main);
+        }
+
+        /* Mobile Frame */
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            background: var(--bg);
+            border-radius: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            border: 8px solid #333;
+        }
+
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            height: 30px;
+            background: #333;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            z-index: 100;
+        }
+
+        .screen {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transition: var(--transition);
+            background: var(--bg);
+        }
+
+        .screen.hidden {
+            transform: translateX(100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Header */
+        header {
+            padding: 50px 20px 15px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .back-btn {
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            background: #f5f5f5;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+            flex: 1;
+        }
+
+        /* Content Areas */
+        .content {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-sub);
+            margin-bottom: 12px;
+            padding-left: 5px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 12px;
+            gap: 12px;
+        }
+
+        .row:not(:last-child) {
+            border-bottom: 1px solid #f9f9f9;
+        }
+
+        .label-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .main-label {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .sub-label {
+            font-size: 12px;
+            color: var(--text-sub);
+        }
+
+        /* Toggles */
+        .toggle {
+            width: 50px;
+            height: 28px;
+            background: #E5E7EB;
+            border-radius: 14px;
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .toggle.active {
+            background: var(--primary);
+        }
+
+        .toggle.active::after {
+            left: 24px;
+        }
+
+        /* Checkboxes */
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 8px;
+            transition: var(--transition);
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            background: #F9FAFB;
+            border: 1px solid #EDEDED;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .checkbox-item.checked {
+            background: #FFF5F4;
+            border-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .check-circle {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #D1D5DB;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .checkbox-item.checked .check-circle,
+        .check-circle.checked {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .checkbox-item.checked .check-circle::after,
+        .check-circle.checked::after {
+            content: '✓';
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer-btns {
+            padding: 20px;
+            background: #fff;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 16px;
+            border-radius: 14px;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-secondary {
+            background: #f5f5f5;
+            color: var(--text-sub);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .nav-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            pointer-events: none;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #DDD;
+        }
+        .dot.active {
+            background: var(--primary);
+            width: 20px;
+            border-radius: 4px;
+        }
+
+        .toast {
+            position: absolute;
+            bottom: 100px;
+            left: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame">
+        <div class="notch"></div>
+        <div id="toast" class="toast">저장되었습니다!</div>
+
+        <!-- Screen 1: Notification Settings -->
+        <div id="screen-1" class="screen">
+            <header>
+                <div class="back-btn" onclick="app.navTo(2)">←</div>
+                <h1>알림 설정</h1>
+            </header>
+            <div class="content">
+                <div class="section-title">광고 및 혜택</div>
+                <div class="card">
+                    <div class="row" onclick="app.toggleAd()">
+                        <div class="label-group">
+                            <span class="main-label">광고성 알림 받기</span>
+                            <span class="sub-label">쇼핑 혜택, 이벤트 정보를 보내드립니다.</span>
+                        </div>
+                        <div id="ad-toggle" class="toggle active"></div>
+                    </div>
+                    <div class="row" onclick="app.toggleNight()">
+                        <div class="label-group">
+                            <span class="main-label">야간 알림 받기</span>
+                            <span class="sub-label">오후 9시 ~ 오전 8시 사이 알림</span>
+                        </div>
+                        <div id="night-toggle" class="toggle active"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-btns">
+                <button class="btn btn-secondary">취소</button>
+                <button class="btn btn-primary" onclick="app.showToast()">저장</button>
+            </div>
+            <div class="nav-indicator">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <!-- Screen 2: User Info Management -->
+        <div id="screen-2" class="screen hidden">
+            <header>
+                <div class="back-btn" onclick="app.navTo(1)">←</div>
+                <h1>회원정보관리</h1>
+            </header>
+            <div class="content">
+                <div class="section-title">마케팅 활용 동의</div>
+                <div class="card">
+                    <div class="row" onclick="app.toggleMainConsent()">
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <div id="main-checkbox" class="check-circle checked" style="border-radius: 4px;"></div>
+                            <span class="main-label">맞춤형 마케팅 동의 (선택)</span>
+                        </div>
+                        <span style="font-size:12px; color:var(--text-sub); text-decoration: underline;">상세보기</span>
+                    </div>
+                    
+                    <div id="sub-channels" class="checkbox-grid">
+                        <div class="checkbox-item checked" onclick="app.toggleSub(this, event)">
+                            <div class="check-circle"></div> <span>이메일</span>
+                        </div>
+                        <div class="checkbox-item checked" onclick="app.toggleSub(this, event)">
+                            <div class="check-circle"></div> <span>문자</span>
+                        </div>
+                        <div class="checkbox-item checked" onclick="app.toggleSub(this, event)">
+                            <div class="check-circle"></div> <span>전화</span>
+                        </div>
+                        <div class="checkbox-item checked" onclick="app.toggleSub(this, event)">
+                            <div class="check-circle"></div> <span>지류</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-btns">
+                <button class="btn btn-primary" onclick="app.navTo(1)">설정 화면 보기</button>
+            </div>
+            <div class="nav-indicator">
+                <div class="dot"></div>
+                <div class="dot active"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const app = {
+            init() {
+                console.log('App initialized');
+                this.adToggle = document.getElementById('ad-toggle');
+                this.nightToggle = document.getElementById('night-toggle');
+                this.mainCheckbox = document.getElementById('main-checkbox');
+                this.subGrid = document.getElementById('sub-channels');
+                this.subItems = this.subGrid.querySelectorAll('.checkbox-item');
+                this.screen1 = document.getElementById('screen-1');
+                this.screen2 = document.getElementById('screen-2');
+                this.toast = document.getElementById('toast');
+            },
+
+            toggleAd() {
+                const isActive = this.adToggle.classList.toggle('active');
+                if (isActive) {
+                    this.nightToggle.classList.add('active');
+                } else {
+                    this.nightToggle.classList.remove('active');
+                }
+            },
+
+            toggleNight() {
+                this.nightToggle.classList.toggle('active');
+            },
+
+            toggleMainConsent() {
+                const isChecked = this.mainCheckbox.classList.toggle('checked');
+                if (isChecked) {
+                    this.subGrid.style.opacity = "1";
+                    this.subItems.forEach(item => item.classList.add('checked'));
+                } else {
+                    this.subGrid.style.opacity = "0.4";
+                    this.subItems.forEach(item => item.classList.remove('checked'));
+                }
+            },
+
+            toggleSub(el, event) {
+                event.stopPropagation();
+                const isChecked = el.classList.toggle('checked');
+                
+                // New Upward Logic: If a sub-channel is turned ON, turn ON the main consent as well
+                if (isChecked && !this.mainCheckbox.classList.contains('checked')) {
+                    this.mainCheckbox.classList.add('checked');
+                    this.subGrid.style.opacity = "1";
+                }
+                
+                // (Optional) If all sub-channels are manually turned OFF, maybe main should turn off?
+                // The user didn't ask for this, so we leave it as is.
+            },
+
+            navTo(screenNum) {
+                if (screenNum === 1) {
+                    this.screen1.classList.remove('hidden');
+                    this.screen2.classList.add('hidden');
+                } else {
+                    this.screen1.classList.add('hidden');
+                    this.screen2.classList.remove('hidden');
+                }
+            },
+
+            showToast() {
+                this.toast.classList.add('show');
+                setTimeout(() => this.toast.classList.remove('show'), 3000);
+            }
+        };
+
+        window.onload = () => app.init();
+    </script>
+</body>
+</html>
