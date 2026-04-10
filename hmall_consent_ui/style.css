@@ -1,0 +1,229 @@
+:root {
+    --primary-color: #FF6B00;
+    --primary-hover: #E55C00;
+    --text-main: #1A1A1A;
+    --text-sub: #666666;
+    --bg-light: #FFFFFF;
+    --bg-gray: #F5F5F5;
+    --border-color: #EAEAEA;
+    --font-family: 'Noto Sans KR', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: #333; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.app-background {
+    width: 375px; 
+    height: 812px; 
+    position: relative;
+    overflow: hidden;
+    background-color: #E2DBD6;
+    background-image: url('https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=1974&auto=format&fit=crop'); 
+    background-size: cover;
+    background-position: center;
+    border-radius: 40px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    border: 8px solid #111;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 10;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.bottom-sheet {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-light);
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    padding: 24px 20px 34px;
+    z-index: 20;
+    transform: translateY(0);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.08);
+}
+
+.bottom-sheet.closed {
+    transform: translateY(100%);
+}
+
+.drag-handle {
+    width: 40px;
+    height: 4px;
+    background-color: #DDDDDD;
+    border-radius: 2px;
+    margin: 0 auto 20px;
+}
+
+.header {
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.main-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.4;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+    word-break: keep-all;
+}
+
+.highlight {
+    color: var(--primary-color);
+}
+
+.description {
+    font-size: 14px;
+    color: var(--text-sub);
+    line-height: 1.5;
+    letter-spacing: -0.3px;
+    word-break: keep-all;
+}
+
+.benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.icon-container {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background-color: #FFF5EE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(255, 107, 0, 0.08);
+}
+
+.icon-svg {
+    width: 24px;
+    height: 24px;
+}
+
+.benefit-content {
+    flex: 1;
+    padding-top: 2px;
+}
+
+.benefit-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 4px;
+    letter-spacing: -0.3px;
+}
+
+.benefit-desc {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.4;
+    letter-spacing: -0.3px;
+    word-break: keep-all;
+}
+
+.consent-link {
+    display: inline-block;
+    font-size: 13px;
+    color: #A0A0A0;
+    text-decoration: underline;
+    margin-bottom: 24px;
+    letter-spacing: -0.2px;
+    transition: color 0.2s;
+}
+
+.consent-link:hover {
+    color: #666;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    letter-spacing: -0.3px;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-secondary {
+    width: 100%;
+    padding: 14px;
+    background-color: transparent;
+    color: #A0A0A0;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s;
+    letter-spacing: -0.3px;
+}
+
+.btn-secondary:hover {
+    color: #777;
+}

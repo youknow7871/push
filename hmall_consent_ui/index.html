@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hmall 맞춤형 마케팅 동의</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-background">
+        <div class="overlay" id="overlay"></div>
+
+        <div class="bottom-sheet" id="bottomSheet">
+            <div class="drag-handle"></div>
+            
+            <div class="header">
+                <h1 class="main-title">오직 고객님만을 위한<br><span class="highlight">Hmall의 특별한 제안</span>을 확인해보세요!</h1>
+                <p class="description">맞춤형 마케팅 동의 시, 고객님의 쇼핑 취향을 분석해 가장 필요한 소식만 골라 전해드려요.</p>
+            </div>
+
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <div class="icon-container">
+                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 9H4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V9Z" fill="#FFF5EE" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 9V22" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 6C22 7.65685 20.6569 9 19 9H5C3.34315 9 2 7.65685 2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6Z" fill="#FFF5EE" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 6C12 4.34315 10.6569 3 9 3H5C3.34315 3 2 4.34315 2 6C2 7.65685 3.34315 9 5 9" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 6C12 4.34315 13.3431 3 15 3H19C20.6569 3 22 4.34315 22 6C22 7.65685 20.6569 9 19 9" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-content">
+                        <h2 class="benefit-title">맞춤형 쿠폰팩</h2>
+                        <p class="benefit-desc">고객님이 자주 보시는 카테고리의 전용 할인 쿠폰을 가장 먼저 보내드려요.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="icon-container">
+                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21 21L16.65 16.65" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M11 14C11 14 13.5 11.5 13.5 9.5C13.5 8.11929 12.3807 7 11 7C9.61929 7 8.5 8.11929 8.5 9.5C8.5 11.5 11 14 11 14Z" fill="#FF6B00"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-content">
+                        <h2 class="benefit-title">취향저격 아이템</h2>
+                        <p class="benefit-desc">수만 개의 상품 중 고객님이 좋아할 만한 상품만 콕 집어 추천해드려요.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="icon-container">
+                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="9" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 7V12L15 15" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M19 4L22 7" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 7L5 4" stroke="#FF6B00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-content">
+                        <h2 class="benefit-title">단독 특가 알림</h2>
+                        <p class="benefit-desc">놓치면 아쉬운 Hmall 단독 구성과 타임세일 소식을 실시간으로 알려드려요.</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="consent-link" id="consentLink">[안내] 개인 맞춤형 서비스 활용 동의 안내 &gt;</a>
+
+            <div class="button-group">
+                <button class="btn-primary" id="btnAccept">나에게 꼭 맞는 혜택 받기</button>
+                <button class="btn-secondary" id="btnReject">다음에 받을게요</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
