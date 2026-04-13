@@ -98,6 +98,16 @@ function showResult(prize) {
     resultDesc.innerHTML = resultDesc.textContent.replace('\n', '<br>');
     
     resultPopup.classList.remove('hidden');
+
+    // Trigger Confetti
+    if (typeof confetti === 'function') {
+        confetti({
+            particleCount: 120,
+            spread: 80,
+            origin: { y: 0.6 },
+            colors: ['#FF2B5E', '#FFFFFF', '#FFD700']
+        });
+    }
 }
 
 closeResultBtn.addEventListener('click', () => {
@@ -107,3 +117,23 @@ closeResultBtn.addEventListener('click', () => {
     spinBtn.style.opacity = "0.5";
     spinBtn.classList.remove('pulse-anim');
 });
+
+// --- Ticker Logic ---
+const fakeWinners = [
+    "김*선님 <span class='prize'>1만원 할인 당첨!</span> 🎉",
+    "이*환님 <span class='prize'>5천원 할인 당첨!</span> 🎁",
+    "박*지님 <span class='prize'>적립금 1천원 당첨!</span> ✨",
+    "최*용님 <span class='prize'>5천원 할인 당첨!</span> 🎁",
+    "정*아님 <span class='prize'>1만원 할인 당첨!</span> 🎉",
+    "권*호님 <span class='prize'>적립금 1천원 당첨!</span> ✨",
+    "이*미님 <span class='prize'>1만원 할인 당첨!</span> 🎉"
+];
+
+const tickerMove = document.getElementById('tickerMove');
+if (tickerMove) {
+    // Array duplication to ensure a smooth scrolling loop
+    const tickerItems = [...fakeWinners, ...fakeWinners, ...fakeWinners, ...fakeWinners].map(
+        text => `<div class="ticker-item">${text}</div>`
+    ).join('');
+    tickerMove.innerHTML = tickerItems;
+}

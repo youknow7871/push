@@ -292,3 +292,41 @@ body {
     border-radius: 12px;
     padding: 16px;
 }
+
+/* Winner Ticker */
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 0;
+    box-sizing: content-box;
+    white-space: nowrap;
+    margin-bottom: 20px;
+}
+
+.ticker-move {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker 25s linear infinite;
+}
+
+.ticker-item {
+    display: inline-block;
+    padding: 0 24px;
+    font-size: 0.9rem;
+    color: #ffd700;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.ticker-item span.prize {
+    color: var(--text-main);
+    font-weight: 400;
+}
+
+@keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
