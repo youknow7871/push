@@ -111,11 +111,8 @@ function showResult(prize) {
 }
 
 closeResultBtn.addEventListener('click', () => {
-    resultPopup.classList.add('hidden');
-    // Disable spin button after 1 use
-    spinBtn.textContent = "참여 완료";
-    spinBtn.style.opacity = "0.5";
-    spinBtn.classList.remove('pulse-anim');
+    // 요청하신 Hmall 특정 기획전 링크로 이동
+    window.location.href = "https://www.hmall.com/md/dpa/mainSpecialShop?mainSeq=98";
 });
 
 // --- Ticker Logic ---
