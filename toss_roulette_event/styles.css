@@ -1,0 +1,289 @@
+:root {
+    --bg-dark: #121212;
+    --bg-card: #1E1E24;
+    --primary: #FF2B5E;
+    --primary-hover: #FF4D79;
+    --text-main: #FFFFFF;
+    --text-muted: #A0A0A0;
+    --wheel-1: #2D2D3B;
+    --wheel-2: #3A3A4A;
+    --wheel-accent: #FF2B5E;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Pretendard', sans-serif;
+    background-color: #000;
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 480px;
+    background-color: var(--bg-dark);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.event-header {
+    text-align: center;
+    padding: 40px 20px 20px;
+}
+
+.badge {
+    display: inline-block;
+    background: rgba(255, 43, 94, 0.15);
+    color: var(--primary);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255, 43, 94, 0.3);
+}
+
+.event-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #fff 0%, #d4d4d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* Roulette */
+.roulette-section {
+    padding: 30px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.roulette-container {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    box-shadow: 0 0 40px rgba(255, 43, 94, 0.2);
+    padding: 8px;
+    background: linear-gradient(135deg, #2a2a35 0%, #1a1a24 100%);
+}
+
+.roulette-pointer {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 40px;
+    background: var(--primary);
+    clip-path: polygon(50% 100%, 0 0, 100% 0);
+    z-index: 10;
+    filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.5));
+}
+
+.roulette-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: var(--bg-card);
+    border: 4px solid var(--primary);
+    border-radius: 50%;
+    z-index: 5;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.roulette-wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    transition: transform 4s cubic-bezier(0.1, 0.7, 0.1, 1);
+    background: conic-gradient(
+        var(--wheel-accent) 0deg 60deg,
+        var(--wheel-1) 60deg 120deg,
+        var(--wheel-2) 120deg 180deg,
+        var(--wheel-1) 180deg 240deg,
+        var(--wheel-2) 240deg 300deg,
+        var(--wheel-1) 300deg 360deg
+    );
+    border: 2px solid rgba(255,255,255,0.1);
+}
+
+.slice-text {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    transform-origin: bottom right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+    padding-bottom: 80px;
+    padding-right: 40px;
+    text-align: center;
+}
+
+/* CTA */
+.cta-section {
+    padding: 0 20px 30px;
+}
+
+.primary-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, #d81646 100%);
+    color: white;
+    border: none;
+    padding: 18px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    border-radius: 16px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(255, 43, 94, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.primary-btn:active {
+    transform: scale(0.96);
+}
+
+.pulse-anim {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 8px 20px rgba(255, 43, 94, 0.4); }
+    50% { transform: scale(1.03); box-shadow: 0 12px 30px rgba(255, 43, 94, 0.6); }
+    100% { transform: scale(1); box-shadow: 0 8px 20px rgba(255, 43, 94, 0.4); }
+}
+
+/* Notice */
+.notice-section {
+    padding: 20px;
+    background-color: var(--bg-card);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.notice-section h3 {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.notice-section ol {
+    padding-left: 18px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    line-height: 1.6;
+}
+
+.notice-section li {
+    margin-bottom: 6px;
+}
+.notice-section li strong {
+    color: #e0e0e0;
+}
+.faded {
+    opacity: 0.5; /* Makes the consent condition less prominent */
+}
+
+/* Popups */
+.popup-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+}
+
+.popup-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.popup-content {
+    background: var(--bg-card);
+    border-radius: 24px;
+    padding: 30px 20px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.1);
+    transform: translateY(0);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.popup-overlay.hidden .popup-content {
+    transform: translateY(20px);
+}
+
+.popup-icon, .confetti-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+}
+
+.popup-content h2 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+}
+
+.popup-content p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+.popup-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.secondary-btn {
+    flex: 1;
+    background: #2D2D3B;
+    color: var(--text-main);
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.popup-actions .primary-btn {
+    flex: 2;
+    border-radius: 12px;
+    padding: 16px;
+}
